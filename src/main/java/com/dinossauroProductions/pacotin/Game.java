@@ -45,24 +45,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
     private int secondsElapsed = 0;
 
 
-    private static int time = 0;
-
     public Game(int tamanhoMapa, int qtdMinas){
 
-        //  PREPARACAO DO PROGRAMA
-
-        addKeyListener(this);
-        addMouseListener(this);
-        setPreferredSize(new Dimension((int)(WIDTH*SCALE),(int)(HEIGHT*SCALE)));
-        initFrame();
-        frame.addWindowListener(this);
-
-
-        image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-        rand = new Random();
+        //  CARREGAR IMAGENS NO JOGO
         ssDisplay = new BufferedImage[10];
 
-        //  CARREGAR IMAGENS NO JOGO
         try{
             BufferedImage spritesheet = ImageIO.read(getClass().getResource("/minesweeper_spritesheet.png"));
             flagImage = spritesheet.getSubimage(0 , 0, 32, 32);
@@ -75,6 +62,19 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        //  PREPARACAO DO PROGRAMA
+
+        addKeyListener(this);
+        addMouseListener(this);
+        setPreferredSize(new Dimension((int)(WIDTH*SCALE),(int)(HEIGHT*SCALE)));
+        initFrame();
+        frame.addWindowListener(this);
+
+
+        image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+        rand = new Random();
+
 
         //  INICIO DA LÓGICA DO JOGO
 
@@ -95,7 +95,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setIconImage(mineImage);
         frame.setVisible(true);
+
 
     }
 
